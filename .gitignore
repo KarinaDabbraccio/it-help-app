@@ -1,0 +1,11 @@
+# ignore git folders
+.git/
+
+# ignore python
+**/__pycache__
+
+# ignore environment variables
+.env*
+
+# ignore django SQL migrations
+src/migrations/
