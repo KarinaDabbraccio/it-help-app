@@ -48,3 +48,4 @@ docker run -it -p 8000:8000 it-help-app/local
 ## Meet the Team
 
 [Kobi](https://github.com/k-hsu)
+[Jim](https://github.com/stretch333)
