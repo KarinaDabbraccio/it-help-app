@@ -1,0 +1,10 @@
+# Ignore git directories and files
+.git/
+.gitignore
+
+# Ignore readme file
+README.md
+
+# Ignore folders containing cached data
+migrations
+__pycache__
