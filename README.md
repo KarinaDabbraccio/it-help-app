@@ -29,7 +29,7 @@ See the [Django Docs](https://docs.djangoproject.com/en/4.0/) for more info.
 
 ## Installation using Docker
 
-Install Docker. Find and configure PostgreSQL (Find and change `listen_addresses` in the `postgresql.conf` and `pg_hba.conf` file) to allow connections from your external IP address. Your external IP address will replace what `DB_URL` is set to when running the Docker files.
+Install Docker. You will also need to install [PostgreSQL](https://www.postgresql.org/download/) and run it on `localhost:5432`. Find and configure PostgreSQL (Find and change `listen_addresses` in the `postgresql.conf` and `pg_hba.conf` file) to allow connections from your external IP address. Your external IP address will replace what `DB_URL` is set to when running the Docker files.
 
 ## Running the Docker container
 
