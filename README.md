@@ -15,6 +15,8 @@ Ensure that the virtual python environment uses [pip](https://anaconda.org/anaco
 - [django-dotenv](https://github.com/jpadilla/django-dotenv) (>=1.4.2) for environment setup
 - [psycopg2](https://pypi.org/project/psycopg2/) (>=2.9.3) for integration with PostgreSQL 14
 
+Finally, install [PostgreSQL](https://www.postgresql.org/download/) locally and follow the installation guide. Ensure that it is running on `localhost:5432`.
+
 ## Running in Python (in the following order)
 
 1. `python manage.py makemigrations src` (Create migrations for the database)
