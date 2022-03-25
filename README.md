@@ -25,7 +25,7 @@ Ensure that the virtual python environment uses [pip](https://anaconda.org/anaco
 
 See the [Django Docs](https://docs.djangoproject.com/en/4.0/) for more info.
 
-## Installation the App using Docker
+## Installation using Docker
 
 Install Docker. Find and configure PostgreSQL (Find and change `listen_addresses` in the `postgresql.conf` and `pg_hba.conf` file) to allow connections from your external IP address. Your external IP address will be replace be what `DB_URL` is set to when running the Docker files.
 
@@ -45,6 +45,8 @@ docker build -t it-help-app/local . --build-arg DB_URL=[host-url] --target build
 docker run -it -p 8000:8000 it-help-app/local
 ```
 
-## Meet the Team
+## Meet the Dev Team
 
-[Kobi](https://github.com/k-hsu)
+[Kobi](https://github.com/k-hsu)\
+[Jim](https://github.com/stretch333)\
+[Jared](https://github.com/Zyphax88)
