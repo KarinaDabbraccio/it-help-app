@@ -28,7 +28,7 @@ RUN yes | apt install python3-pip
 
 RUN pip3 install django
 
-RUN pip3 install psycopg2-binary django-dotenv
+RUN pip3 install psycopg2-binary django-dotenv tzdata
 
 FROM base as development
 
@@ -54,4 +54,4 @@ EXPOSE 5432 8000
 
 RUN ufw allow 8000
 
-CMD ["python3", "manage.py", "runserver"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
