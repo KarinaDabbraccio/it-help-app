@@ -6,7 +6,7 @@ IT Help is a web application that uses the Django techstack with PostgreSQL
 
 Use the package manager [conda](https://docs.anaconda.com/anaconda/user-guide/) to install the following:
 
-- python (>=3.10.0)
+- [python](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) (>=3.10.0)
 - [pip](https://anaconda.org/anaconda/pip) (>=21.2.4)
 - [django](https://anaconda.org/anaconda/django) (>=3.2.5)
 
@@ -27,7 +27,7 @@ See the [Django Docs](https://docs.djangoproject.com/en/4.0/) for more info.
 
 ## Installation using Docker
 
-Install Docker. Find and configure PostgreSQL (Find and change `listen_addresses` in the `postgresql.conf` and `pg_hba.conf` file) to allow connections from your external IP address. Your external IP address will be replace be what `DB_URL` is set to when running the Docker files.
+Install Docker. Find and configure PostgreSQL (Find and change `listen_addresses` in the `postgresql.conf` and `pg_hba.conf` file) to allow connections from your external IP address. Your external IP address will replace what `DB_URL` is set to when running the Docker files.
 
 ## Running the Docker container
 
