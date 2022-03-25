@@ -26,7 +26,8 @@ SECRET_KEY = os.getenv('DJANGO_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_ENV') == 'development'
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost'] if DEBUG else []
+# Use 127.0.0.1 or localhost to connect to app; 0.0.0.0 is for the Docker container
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost'] if DEBUG else []
 
 
 # Application definition

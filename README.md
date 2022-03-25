@@ -39,7 +39,7 @@ and run it
 ```
 docker run -it --rm it-help-app/local
 ```
-You can also run the server too (not working yet!!!)
+You can also run the server too
 ```
 docker build -t it-help-app/local . --build-arg DB_URL=[host-url] --target build
 docker run -it -p 8000:8000 it-help-app/local
