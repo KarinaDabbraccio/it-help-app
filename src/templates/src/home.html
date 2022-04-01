@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'src/base.html'%}
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -8,7 +8,7 @@
     <title></title>
   </head>
   <body>
-      
+    {% block content %}  
     <section>
       <nav class="ticket-nav">
         <ul>
@@ -43,5 +43,6 @@
         </tr>
       </table>
     </section>
+    {% endblock %}
   </body>
 </html>

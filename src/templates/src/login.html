@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'src/base.html'%}
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -8,7 +8,7 @@
     <title></title>
   </head>
   <body>
-
+    {% block content %}
     <div class="sign-in-form">
       <form id="sign-in">
         <h3>Login</h3>
@@ -20,5 +20,6 @@
         <input type="submit" id="submit" value="Submit">
       </form>
     </div>
+    {% endblock %}
   </body>
 </html>
