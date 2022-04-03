@@ -31,7 +31,7 @@ DB_PASSWORD=
 
 ## Running in Python (in the following order)
 
-Steps 1 and 2 only required initialy for admin page
+Steps 1 and 2 only required initially for admin page
 1. `python manage.py makemigrations` (Create migrations for the database)
 2. `python manage.py migrate` (Perform migration)
 
