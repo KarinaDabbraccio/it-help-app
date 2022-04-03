@@ -17,11 +17,29 @@ Ensure that the virtual python environment uses [pip](https://anaconda.org/anaco
 
 Finally, install [PostgreSQL](https://www.postgresql.org/download/) locally and follow the installation guide. Ensure that it is running on `localhost:5432`.
 
+## Set up .env
+
+Create an .env file in your root directory with the following information:
+```
+DJANGO_ENV=development
+DJANGO_KEY=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+```
+
+
 ## Running in Python (in the following order)
 
-1. `python manage.py makemigrations src` (Create migrations for the database)
-2. `python manage.py sqlmigrate src [migration-number]` (Perform migration)
-3. Run one of the following
+Steps 1 and 2 only required initialy for admin page
+1. `python manage.py makemigrations` (Create migrations for the database)
+2. `python manage.py migrate` (Perform migration)
+
+Steps 3 and 4 required for any changes to models
+3. `python manage.py makemigrations src` (Create migrations for the database)
+4. `python manage.py migrate src [migration-number]` (Perform migration)
+
+5. Run one of the following
 - `python manage.py test` (Run tests locally)
 - `python manage.py runserver` (Run server locally)
 
