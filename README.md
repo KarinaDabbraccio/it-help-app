@@ -32,10 +32,12 @@ DB_PASSWORD=
 ## Running in Python (in the following order)
 
 Steps 1 and 2 only required initially for admin page
+
 1. `python manage.py makemigrations` (Create migrations for the database)
 2. `python manage.py migrate` (Perform migration)
 
 Steps 3 and 4 required for any changes to models
+
 3. `python manage.py makemigrations src` (Create migrations for the database)
 4. `python manage.py migrate src [migration-number]` (Perform migration)
 
