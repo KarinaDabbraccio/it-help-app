@@ -19,7 +19,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=24)
     date_created = models.DateTimeField('Date Created', editable=False, default=now)
     user_group = models.CharField(max_length=1, choices=USER_TYPE)
-    ticketNum = models.ManyToManyField(Ticket, blank=True)
+    user_ticket = models.ManyToManyField(Ticket, blank=True)
 
     @property
     def full_name(self) -> str:
