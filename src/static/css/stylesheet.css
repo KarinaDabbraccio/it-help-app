@@ -38,15 +38,9 @@
     color: navy;
     font-family: 'Dosis', sans-serif;
   }
-  
-  #email {
+  .inputFields{
     height: 2em;
   }
-  
-  #password {
-    height: 2em;
-  }
-  
   #submit {
     background-color: blue;
     color: white;
