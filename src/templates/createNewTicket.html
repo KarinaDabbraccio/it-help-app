@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+
+    {% block content %}
+    <div class="sign-in-form" style="width:1000px;height:400px;margin-top: 7em;">
+      <form id="newTicket"  action="/newticket/" method="POST">
+          {% csrf_token %}
+        <h3>New Ticket</h3>
+          <input class="inputFields" style="width:400px" name="title" placeholder="Summary of issue...">
+          <br><br>
+          Priority:
+          <select name="priority">
+              <option value="R">Routine</option>
+              <option value="U">Urgent</option>
+              <option value="E">Emergency</option>
+            </select>
+          <br><br>
+         <textarea rows = "5" cols = "60" name = "description" placeholder="Please enter issue here..."></textarea>
+        <br><br>
+        <input type="submit" id="submit" value="Submit">
+      </form>
+        {{error}}
+
+    </div>
+    {% endblock %}
