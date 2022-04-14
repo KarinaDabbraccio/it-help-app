@@ -1,6 +1,12 @@
 {% extends 'base.html'%}
 
-    {% block content %}  
+    {% block content %}
+
+    {% for ticket in tickets.all %}
+    <h3>{{ ticket.title }}</h3>
+    <hr>
+    {% endfor %}
+
     <section>
       <nav class="ticket-nav">
         <ul>

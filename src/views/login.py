@@ -1,4 +1,6 @@
 from django.http import HttpResponse
+from django.template import loader
 
 def as_view(request) -> HttpResponse:
-    return HttpResponse("Hello, authenticated user. You're at the login page")
+    template = loader.get_template('login.html')
+    return HttpResponse(template.render())
