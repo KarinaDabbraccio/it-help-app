@@ -19,6 +19,7 @@ class Ticket(models.Model):
     description = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     last_checked = models.DateTimeField(null=True, blank=True)
+    due_date = models.DateTimeField(null=True, blank=True)
     date_closed = models.DateTimeField(null=True, blank=True)
 
     def __str__(self) -> str:
