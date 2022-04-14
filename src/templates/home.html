@@ -1,12 +1,6 @@
 {% extends 'base.html'%}
 
-    {% block content %}
-
-    {% for ticket in tickets.all %}
-    <h3>{{ ticket.title }}</h3>
-    <hr>
-    {% endfor %}
-
+    {% block content %}  
     <section>
       <nav class="ticket-nav">
         <ul>
@@ -27,18 +21,14 @@
           <th>Status</th>
           <th>Assigned To</th>
         </tr>
+        {% for ticket in tickets %}
         <tr>
-          <th>00001</th>
-          <th>4/2/2022</th>
-          <th>In Progress</th>
-          <th>Dev 1</th>
-        </tr>
-        <tr>
-          <th>00002</th>
-          <th>4/3/2022</th>
-          <th>In Progress</th>
-          <th>Dev 2</th>
-        </tr>
+           <td>{{ticket.ticketNum}}</td>
+           <td>{{ticket.date_created}}</td>
+           <td>{{ticket.status}}</td>
+           <td>{{st.date_created}}</td>
+       </tr>
+      {% endfor %}
       </table>
     </section>
     {% endblock %}
