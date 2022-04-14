@@ -1,14 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.template import loader
-from src.models.ticket import Ticket
+from src.models import *
+from django.shortcuts import render
 
-def as_view(request) -> HttpResponse:
+def as_view(request):
     template = loader.get_template('home.html')
-    return HttpResponse(template.render())
-
-# Function to show the Ticket objects on the home template
-def showtickets(request):
-    tickets = Ticket.objects
-    return render(request, 'home.html', { 'tickets':tickets } )
-    
+    tickets = Ticket.objects.all();
+    return render(request, 'home.html', {'tickets': tickets})
