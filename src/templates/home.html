@@ -1,34 +1,69 @@
 {% extends 'base.html'%}
 
-    {% block content %}  
-    <section>
+    {% block content %}
       <nav class="ticket-nav">
         <ul>
           <li><a href="#">My Tickets</a>
-          <ul id="sublist">
-            <li><a href="#">All</a></li>
-            <li><a href="#">Open</a></li>
-            <li><a href="#">Closed</a></li>
-          </ul></li>
+            <li><a href="#">All Tickets</a></li>
           <li><a href="/newticket">Create Ticket</a></li>
-          <li><a href="#">Search Ticket</a></li>
+          <li><a onclick="openForm()" >Search Ticket</a></li>
+            <div style="display:none" class="form-popup" id="myForm">
+          <form type="POST" action="/ticketInfo" class="form-container">
+            <input type="text" placeholder="Search Ticket" name="ticket" required>
+          </form>
+        </div>
+
         </ul>
       </nav>
-      <table>
-        <tr>
-          <th>Ticket Number</th>
-          <th>Due Date</th>
-          <th>Status</th>
-          <th>Assigned To</th>
-        </tr>
+        <div class="ticketTable">
+
         {% for ticket in tickets %}
-        <tr>
-           <td>{{ticket.ticketNum}}</td>
-           <td>{{ticket.date_created}}</td>
-           <td>{{ticket.status}}</td>
-           <td>{{st.date_created}}</td>
-       </tr>
+        <div onclick="getTicketInfo('{{ticket.ticketNum}}')" class="ticketInfo">
+           <h3 class="subTicketHeaders">{{ticket.ticketNum}} - {{ticket.title}}</h3>
+           <h4 class="subTicketHeaders">Status:
+           {% if ticket.status == "O" %}
+            Open
+            {% else %}
+            Closed
+            {% endif %}
+           </h4>
+            <h4 class="{{ticket.priority}}">Priority:
+            {% if ticket.priority == "U" %}
+            Urgent
+            {% elif ticket.priority == "E" %}
+            Emergency
+            {% else %}
+            Routine
+            {% endif %}
+            </h4>
+            <h4 class="subTicketHeaders">Assigned:
+            {% if ticket.is_assigned == True %}
+                <p class="assigned{{ticket.is_assigned}}"> &#x2713;</p>
+            {% else %}
+                <p class="assigned{{ticket.is_assigned}}">&#x2715;</p>
+            {% endif %}
+            </h4>
+           <p class="ticketP">Creation Date: {{ticket.date_created}}</p>
+            <p class="ticketP">Due Date: {{ticket.due_date}}</p>
+            <p class="ticketP">Last Checked: {{ticket.last_checked}}</p>
+
+       </div>
       {% endfor %}
-      </table>
-    </section>
+            </div>
+<script>
+    function getTicketInfo(ticketNum){
+
+    }
+function openForm() {
+  let form = document.getElementById("myForm");
+  if (form.style.display === "none") {
+    form.style.display = "block";
+  }else{
+    form.style.display = "none";
+  }
+
+}
+
+
+</script>
     {% endblock %}
