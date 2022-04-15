@@ -1,10 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.E{
+color:red;
+}
+.subTicketHeaders{
+    color:blue;
+}
+.U{
+color:orange
+}
+.R{
+color:green
+}
+.ticketP{
+  display:inline;
+  margin-right:20px;
+      color:blue;}
+
 .page-header {
     background: lightgray;
     max-height: 5em;
     padding: 1em;
     padding-left: 3em;
-      width: 100%;
-    position: fixed;
     left: 0;
     top: 0;
     font-family: 'Dosis', sans-serif;
@@ -48,7 +67,10 @@
     height: 2em;
     border: none;
   }
-  
+  .content{
+
+    height: 430px;
+    }
   /* Container for flexboxes */
   section {
     margin-top: 10em;
@@ -72,8 +94,29 @@
     background-color: powderblue;
     font-size: 20px;
     color: navy;
+    display:inline-block;
+    margin-left:5%;
+    width:15%;
+    height:100%;
+    float: left;
+    padding:5%;
   }
-  
+  li:hover{
+    text-decoration: underline;
+  }
+  .ticketTable{
+      display:inline-block;
+      margin-left:2%;
+      width:65%;
+      overflow: auto;
+      height:500px;
+  }
+  .ticketInfo:hover {
+  background-color: yellow;
+}
+  .ticketInfo{
+  border-bottom: 4px solid royalblue;
+  }
   /* Style the list inside the menu */
   nav ul {
     list-style-type: none;
@@ -91,8 +134,13 @@
   
   li {
     padding: 0.25em;
+    font-size: 25px;
   }
-  
+  .assignedTrue{
+  color:green;
+  display:inline}
+  .assignedFalse{
+  color:red;display:inline}
   table {
     -webkit-flex: 3;
     -ms-flex: 3;
@@ -116,4 +164,5 @@
   tr:nth-child(even) {
     background-color: #dddddd;
   }
-  
+
+
