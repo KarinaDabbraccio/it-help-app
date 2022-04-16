@@ -14,10 +14,75 @@ function getCookie(name) {
       }
       return cookieValue;
 }
-let searchTicket = document.getElementById("ticketSearch");
+
+function AllTickets(){
+  let allTickets = "alltickets";
+  let token = getCookie("csrftoken");
+  console.log("test");
+
+  $.ajax(
+    {
+        headers: { "X-CSRFToken": token },
+        type:"POST",
+        url: "/searchticket/",
+        data:{
+                 "alltickets": allTickets,
+        },
+        success: function( response ) 
+        {
+          BuildTable(response)
+          let searchTicket = document.getElementById("ticketSearch");
+          let status = document.getElementsByName("status")[0];
+          let priority = document.getElementsByName("priority")[0];
+          let assigned = document.getElementsByName("assigned")[0];
+
+          status.value = "A";
+          priority.value = "A";
+          assigned.value = "A";
+          searchTicket.value = "";
+
+          console.log(status)
+        }
+      }
+  )
+  
+}
+function MyTickets(){
+  let myTickets = "mytickets";
+  let token = getCookie("csrftoken");
+
+  $.ajax(
+    {
+        headers: { "X-CSRFToken": token },
+        type:"POST",
+        url: "/searchticket/",
+        data:{
+                 "mytickets": myTickets,
+        },
+        success: function( response ) 
+        {
+          BuildTable(response)
+          let searchTicket = document.getElementById("ticketSearch");
+          let status = document.getElementsByName("status")[0];
+          let priority = document.getElementsByName("priority")[0];
+          let assigned = document.getElementsByName("assigned")[0];
+
+          status.value = "A";
+          priority.value = "A";
+          assigned.value = "A";
+          searchTicket.value = "";
+
+          console.log(status)
+        }
+      }
+  )
+
+
+}
+
 function  TicketSearch(){
 
-  let data = searchTicket.value;
+  let searchTicket = document.getElementById("ticketSearch");
   let status = document.getElementsByName("status")[0];
   let priority = document.getElementsByName("priority")[0];
   let assigned = document.getElementsByName("assigned")[0];
@@ -29,15 +94,20 @@ function  TicketSearch(){
         type:"POST",
         url: "/searchticket/",
         data:{
-                 post_id: data,
+                 post_id: searchTicket.value,
                  "status": status.value,
                  "priority": priority.value,
                  "assigned": assigned.value,
         },
         success: function( response ) 
         {
-
-          let jsonReturn = JSON.parse(response);
+          BuildTable(response)
+        }
+      }
+  )
+}
+function BuildTable(response){
+  let jsonReturn = JSON.parse(response);
           let ticketTable = document.getElementById("ticketDiv");
           let status;
           let assigned;
@@ -76,7 +146,5 @@ function  TicketSearch(){
             innerHtml += ticketDiv;
           }
           ticketTable.innerHTML = innerHtml;
-        }
-      }
-  )
+
 }
