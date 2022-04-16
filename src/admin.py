@@ -7,5 +7,5 @@ from src.models import UserTicket
 # Register your models here.
 admin.site.register(Ticket)
 admin.site.register(UserTicket)
-admin.site.register(Profile)
+admin.site.register(Comment)
 
