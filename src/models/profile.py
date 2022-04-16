@@ -24,7 +24,7 @@ class Profile(models.Model):
     user_permissions: many-to-many relations - ignore this
     is_staff: boolean to admin site access - set to false
     is_active: boolean to flag account - set to true
-    is_supersuer: boolean for all access - set to false
+    is_superuser: boolean for all access - set to false
 
     last_login: datetime, auto generated last login
     date_joined: datetime, auto generated when created

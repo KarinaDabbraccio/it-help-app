@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class Comment(models.Model):
     message = models.TextField()
     date_entered = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     ticketNum = models.ForeignKey(Ticket, on_delete=models.PROTECT)
 
     def __str__(self) -> str:
-        return '{ticketNum} | {message} - {author}'.format(ticketNum=self.ticketNum, message=self.message, author=self.author)
+        return '{ticketNum} | {message} - {user}'.format(ticketNum=self.ticketNum, message=self.message, user=self.user)
