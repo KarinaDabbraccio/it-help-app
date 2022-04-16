@@ -7,7 +7,7 @@ from .ticket import Ticket
 class Profile(models.Model):
 
     USER_TYPE = [
-        ('C', 'Customer'),
+        ('U', 'User'),
         ('T', 'Tech')
     ]
 
