@@ -1,3 +1,38 @@
+function getTicketInfo(ticket){
+  let allTickets = "alltickets";
+  let token = getCookie("csrftoken");
+  console.log("test");
+
+  $.ajax(
+    {
+        headers: { "X-CSRFToken": token },
+        type:"POST",
+        url: "/getticket/",
+        data:{
+                 "ticketNum": ticket,
+        },
+        success: function( response ) 
+        {
+          let ticketTable = document.getElementById("ticketDiv");
+          let jsonReturn = JSON.parse(response);
+          ticketTable.innerHTML = "";
+          for(var i = 0; i < jsonReturn.length; i++) {
+            var obj = jsonReturn[i];
+            ticketTable.innerHTML += "<p>Ticket Number: " + obj.ticketNum + " - " + obj.title + "</p>";
+            ticketTable.innerHTML += "<p>Assigned: " + obj.is_assigned +"</p>";
+            ticketTable.innerHTML += "<p>Priority: " + obj.priority +"</p>";
+            ticketTable.innerHTML += "<p>Date Created: " + obj.date_created + "</p>";
+            ticketTable.innerHTML += "<p>Due Date: " + obj.due_date + "</p>";
+            ticketTable.innerHTML += "<p>Last Checked: " + obj.last_checked + "</p>";
+            ticketTable.innerHTML += "<p>Date Closed: " + obj.date_closed + "</p>";
+            ticketTable.innerHTML += "<p>Description: " + obj.description + "</p>";
+        }
+
+
+        }
+      }
+  )
+}
 
 function getCookie(name) {
       let cookieValue = null;
@@ -107,7 +142,7 @@ function  TicketSearch(){
   )
 }
 function BuildTable(response){
-  let jsonReturn = JSON.parse(response);
+          let jsonReturn = JSON.parse(response);
           let ticketTable = document.getElementById("ticketDiv");
           let status;
           let assigned;
