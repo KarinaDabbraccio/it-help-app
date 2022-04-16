@@ -28,22 +28,25 @@ DB_USER=
 DB_PASSWORD=
 ```
 
-
 ## Running in Python (in the following order)
-
-Steps 1 and 2 only required initially for admin page
 
 1. `python manage.py makemigrations` (Create migrations for the database)
 2. `python manage.py migrate` (Perform migration)
-
-Steps 3 and 4 required for any changes to models
-
-3. `python manage.py makemigrations src` (Create migrations for the database)
-4. `python manage.py migrate src [migration-number]` (Perform migration)
-
-5. Run one of the following
+3. Run one of the following
 - `python manage.py test` (Run tests locally)
 - `python manage.py runserver` (Run server locally)
+
+## Initializing the database with sample data
+
+Optional:
+`python manage.py flush` 
+Clears all the current data in your database
+
+`python manage.py loaddata data_init.json` 
+Overwrites the first 5/6 rows of data for each model, including any superusers
+
+`python manage.py createsuperuser` 
+Follow the instructions to create your own user for admin login
 
 See the [Django Docs](https://docs.djangoproject.com/en/4.0/) for more info.
 
