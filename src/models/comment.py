@@ -15,7 +15,7 @@ class Comment(models.Model):
     '''
     message = models.TextField()
     date_entered = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.PROTECT, default=None)
     ticketNum = models.ForeignKey(Ticket, on_delete=models.PROTECT)
 
     '''
