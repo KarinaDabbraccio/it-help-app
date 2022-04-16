@@ -43,8 +43,11 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
-            Profile.objects.create(user=instance)
+            Profile.objects.create(username=instance)
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+
+    def __str__(self) -> str:
+        return '{username} - {user_type}'.format(username=self.username, user_type=self.user_group)
