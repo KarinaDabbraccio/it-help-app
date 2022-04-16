@@ -13,10 +13,20 @@ from django.core.serializers.json import DjangoJSONEncoder
 @login_required(login_url='/login')
 def as_view(request):
         if request.method == 'POST':
-                postInfo = request.POST['post_id']
-                status = request.POST['status']
-                priority = request.POST['priority']
-                assigned = request.POST['assigned']
+                if 'alltickets' in request.POST:
+                    status = ""
+                    priority = ""
+                    assigned = "A"
+                    postInfo = ""
+                elif 'mytickets' in request.POST:
+                    result = UserTicket.objects.get(user_id=request.user)
+                    jsonReturn = json.dumps(list(result.user_ticket.all().values()), indent = 4, sort_keys = True, default = str)
+                    return JsonResponse(jsonReturn, safe=False)
+                else:
+                    postInfo = request.POST['post_id']
+                    status = request.POST['status']
+                    priority = request.POST['priority']
+                    assigned = request.POST['assigned']
                 if status == "A":
                     status = ""
                 if priority == "A":
