@@ -101,9 +101,6 @@ color:green
     float: left;
     padding:5%;
   }
-  li:hover{
-    text-decoration: underline;
-  }
   .ticketTable{
       display:inline-block;
       margin-left:2%;
@@ -141,28 +138,47 @@ color:green
   display:inline}
   .assignedFalse{
   color:red;display:inline}
-  table {
-    -webkit-flex: 3;
-    -ms-flex: 3;
-    flex: 3;
-    background-color: #f1f1f1;
-    padding: 10px;
-  }
-  
-  table {
-    font-family: 'Dosis', sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
+
+  input[type="checkbox"] {
+    width: 0;
+    height: 0;
+    visibility: hidden;
   }
 
-
+  label {
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    background-color: #477a85;
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 0 20px #477a8550;
+  }
+  label::after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background-color: #e8f5f7;
+    position: absolute;
+    border-radius: 70px;
+    top: 2px;
+    left: 3px;
+    transition: 0.5s;
+  }
+  
+  input:checked + label:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+  }
+  
+  input:checked + label {
+    background-color: #243d42;
+  }
+  
+  label:active:after {
+    width: 15px;
+  }
+  
+  
