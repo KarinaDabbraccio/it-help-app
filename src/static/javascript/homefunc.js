@@ -16,17 +16,47 @@ function getTicketInfo(ticket){
           let ticketTable = document.getElementById("ticketDiv");
           let jsonReturn = JSON.parse(response);
           ticketTable.innerHTML = "";
-          for(var i = 0; i < jsonReturn.length; i++) {
+
+          /*
+          Since we are only passing 1 ticket with the possibily of multiple comments,
+          we know the first object in jsonReturn will be the ticket
+          */
+          var obj = jsonReturn[0];
+          ticketTable.innerHTML += "<p>Ticket Number: " + obj.ticketNum + " - " + obj.title + "</p>";
+          ticketTable.innerHTML += "<p>Assigned: " + obj.is_assigned +"</p>";
+          ticketTable.innerHTML += "<p>Priority: " + obj.priority +"</p>";
+          ticketTable.innerHTML += "<p>Date Created: " + obj.date_created + "</p>";
+          ticketTable.innerHTML += "<p>Due Date: " + obj.due_date + "</p>";
+          ticketTable.innerHTML += "<p>Last Checked: " + obj.last_checked + "</p>";
+          ticketTable.innerHTML += "<p>Date Closed: " + obj.date_closed + "</p>";
+          ticketTable.innerHTML += "<p>Description: " + obj.description + "</p>";
+          ticketTable.innerHTML += "<p>Comments:</p>";
+
+          /*
+          Check to see if ticket has any comments.  If not offer to add one here?
+          */
+          if (jsonReturn.length <= 1) {
+            ticketTable.innerHTML += "<p>There are no comments! </p>";
+          }
+
+          /*
+          Loop through any remaining jsonReturn objects, these will be comments if any
+          and print out those fields
+          */
+         else{
+          for(var i = 1; i < jsonReturn.length; i++) {
             var obj = jsonReturn[i];
-            ticketTable.innerHTML += "<p>Ticket Number: " + obj.ticketNum + " - " + obj.title + "</p>";
-            ticketTable.innerHTML += "<p>Assigned: " + obj.is_assigned +"</p>";
-            ticketTable.innerHTML += "<p>Priority: " + obj.priority +"</p>";
-            ticketTable.innerHTML += "<p>Date Created: " + obj.date_created + "</p>";
-            ticketTable.innerHTML += "<p>Due Date: " + obj.due_date + "</p>";
-            ticketTable.innerHTML += "<p>Last Checked: " + obj.last_checked + "</p>";
-            ticketTable.innerHTML += "<p>Date Closed: " + obj.date_closed + "</p>";
-            ticketTable.innerHTML += "<p>Description: " + obj.description + "</p>";
-        }
+            ticketTable.innerHTML += "<p>Comment "+ i + "</p>";
+            ticketTable.innerHTML += "<p>Message: " + obj.message + "</p>";
+            ticketTable.innerHTML += "<p>From User: " + obj.user__username +  " (" + obj.user__profile__user_group + ")</p>";
+            ticketTable.innerHTML += "<p>Date Entered: " + obj.date_entered + "</p>";
+          }
+         }
+
+
+
+
+          
 
 
         }
