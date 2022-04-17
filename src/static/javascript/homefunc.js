@@ -52,13 +52,6 @@ function getTicketInfo(ticket){
             ticketTable.innerHTML += "<p>Date Entered: " + obj.date_entered + "</p>";
           }
          }
-
-
-
-
-          
-
-
         }
       }
   )
