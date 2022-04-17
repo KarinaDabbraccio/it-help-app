@@ -19,7 +19,7 @@ def as_view(request):
                     assigned = "A"
                     postInfo = ""
                 elif 'mytickets' in request.POST:
-                    result = UserTicket.objects.get(user_id=request.user)
+                    result = Profile.objects.get(username=request.user)
                     jsonReturn = json.dumps(list(result.user_ticket.all().values()), indent = 4, sort_keys = True, default = str)
                     return JsonResponse(jsonReturn, safe=False)
                 else:
