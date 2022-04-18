@@ -33,7 +33,6 @@ def as_view(request):
                 
                 #if login is tech update last checked in ticket
                 if(currentUserGroup == 'T') :
-                        print('time updated!')
                         Ticket.objects.filter(ticketNum=request.POST["ticketNum"]).update(last_checked=timezone.now())
 
                 #queryset for all the data needed for ticket info
