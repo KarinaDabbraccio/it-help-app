@@ -20,7 +20,8 @@ def as_view(request):
         if request.method == 'POST':
                 jsonReturn = json.dumps("wow");
                 ticketResult = Ticket.objects.filter(ticketNum=request.POST["ticketNum"])
-                commentResult = Comment.objects.filter(ticketNum=request.POST["ticketNum"])
+                commentResult = Comment.objects.filter(ticketNum=request.POST["ticketNum"]).order_by('date_entered')
                 result = chain(ticketResult.values(), commentResult.values('message', 'user__username', 'user__profile__user_group', 'date_entered'))
                 jsonReturn = json.dumps(list(result), indent = 4, sort_keys = True, default = str)
+                print(jsonReturn)
                 return JsonResponse(jsonReturn, safe=False)
