@@ -10,9 +10,13 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from itertools import chain
 from django.core import serializers
+from django.utils import timezone
 
 
 '''
+On POST check if user is a tech. If so, updates ticket's last_checked
+prior to query
+
 ticketResult get all the values for the ticket clicked
 userResult gets the user who created this ticket
 techResults gets one or more, if any techs are assigned to this ticket
@@ -23,6 +27,16 @@ result joins the querysets together
 @login_required(login_url='/login')
 def as_view(request):
         if request.method == 'POST':
+                #check to see who is logged in
+                currentUser = Profile.objects.get(username_id=request.user)
+                currentUserGroup = getattr(currentUser, 'user_group')
+                
+                #if login is tech update last checked in ticket
+                if(currentUserGroup == 'T') :
+                        print('time updated!')
+                        Ticket.objects.filter(ticketNum=request.POST["ticketNum"]).update(last_checked=timezone.now())
+
+                #queryset for all the data needed for ticket info
                 ticketResult = Ticket.objects.filter(ticketNum=request.POST["ticketNum"])
                 userResult = Profile.objects.filter(user_ticket=request.POST["ticketNum"]).filter(user_group='U')
                 techResult = Profile.objects.filter(user_ticket=request.POST["ticketNum"]).filter(user_group='T')
