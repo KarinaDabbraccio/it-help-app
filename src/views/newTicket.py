@@ -5,6 +5,7 @@ from datetime import timedelta, date
 @login_required(login_url='/login')
 def as_view(request):
     if request.method =='POST':
+        currentUser = Profile.objects.get(username_id=request.user)
         newTicket = Ticket()
         newTicket.status = "O"
         newTicket.priority = request.POST["priority"]
@@ -19,6 +20,7 @@ def as_view(request):
         newTicket.due_date = due_date
         try:
             newTicket.save()
+            currentUser.user_ticket.add(newTicket)
         except:
             args = {}
             text = "Submission Failed"
