@@ -200,7 +200,7 @@ function BuildTable(response){
             }else{''
               status = "Closed";
             }
-            ticketDiv += '<h4 class="subTicketHeaders">Status: ' + status + '</h4>'
+            ticketDiv += '<p class="subTicketHeaders">Status: ' + status + '</p>'
             if (jsonReturn[i]["priority"] == "R"){
               priority = "Routine";
             }else if(jsonReturn[i]["priority"] == "U"){
@@ -208,7 +208,7 @@ function BuildTable(response){
             }else{
               priority = "Emergency"
             }
-             ticketDiv += '<h4 class="' + jsonReturn[i]["priority"] + '">Priority: ' + priority + '</h4>'
+             ticketDiv += '<p class="' + jsonReturn[i]["priority"] + '">Priority: ' + priority + '</p>'
              if (jsonReturn[i]["is_assigned"] == true){
               assigned = "True";
               mark = "&#x2713;"
@@ -216,8 +216,8 @@ function BuildTable(response){
               assigned = "False"
               mark = "&#x2715;"
             }
-
-            ticketDiv += '<h4 class="subTicketHeaders">Assigned:<p class="assigned'+assigned+'">' + mark +'</p></h4><p class="ticketP">Creation Date: ' + jsonReturn[i]["date_created"] +'</p><p class="ticketP">Due Date:' + jsonReturn[i]["due_date"] + '</p><p class="ticketP">Last Checked:' + jsonReturn[i]["last_checked"] + '</p></div>'
+/*  Assigned:<p class="assigned'+assigned+'">' + mark +'</p></h4>     */
+            ticketDiv += '<p class="subTicketHeaders">Assigned:<b class="assigned'+assigned+'">' + mark +'</b><p class="ticketP">Creation Date: ' + jsonReturn[i]["date_created"] +'</p><p class="ticketP">Due Date:' + jsonReturn[i]["due_date"] + '</p><p class="ticketP">Last Checked:' + jsonReturn[i]["last_checked"] + '</p></div>'
             innerHtml += ticketDiv;
           }
           ticketTable.innerHTML = innerHtml;
