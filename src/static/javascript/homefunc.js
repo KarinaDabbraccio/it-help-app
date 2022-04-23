@@ -24,7 +24,8 @@ function getTicketInfo(ticket){
           we know the first object in jsonReturn will be the ticket
           */
           var obj = jsonReturn[0];
-          ticketTable.innerHTML += "<p id='title'>Ticket Number: " + obj.ticketNum + " - <i>" + obj.title + "</i></p>";
+          ticketTable.innerHTML += "<p id='title'><strong>" + obj.title + "</strong></p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Ticket Number:</strong> " + obj.ticketNum + "</p>";
           ticketTable.innerHTML += "<p id='ticketInfo'><strong>Assigned:</strong> " + obj.is_assigned +"</p>";
           ticketTable.innerHTML += "<p id='ticketInfo'><strong>Priority</strong>: " + obj.priority +"</p>";
           ticketTable.innerHTML += "<p id='ticketInfo'><strong>Date Created:</strong> " + obj.date_created + "</p>";
