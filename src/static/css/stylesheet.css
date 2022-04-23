@@ -219,15 +219,20 @@ margin-left:4px;
 
   /* Stylings for single ticket view */
   #title {
-    font-size: 28px;
-    color: midnightblue;
-    font-family: 'Dosis', sans-serif;
+    font-size: 18px;
+    color: darkblue;
+    font-family: Verdana;
+	padding: 10px;
+	margin-bottom: 10px;
     border-bottom: 3px solid darkblue;
   }
 
    #ticketInfo {
-    font-size: 18px;
-    font-family: 'Dosis', sans-serif;
+	padding-left:10px;
+    font-size: 14px;
+	font-family: Verdana;
+	line-height:1.6;
+    color: midnightblue;
   }
 
 

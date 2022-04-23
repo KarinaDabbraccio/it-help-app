@@ -25,21 +25,23 @@ function getTicketInfo(ticket){
           */
           var obj = jsonReturn[0];
           ticketTable.innerHTML += "<p id='title'><strong>" + obj.title + "</strong></p>";
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Ticket Number:</strong> " + obj.ticketNum + "</p>";
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Assigned:</strong> " + obj.is_assigned +"</p>";
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Priority</strong>: " + obj.priority +"</p>";
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Date Created:</strong> " + obj.date_created + "</p>";
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Due Date:</strong> " + obj.due_date + "</p>";
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Last Checked:</strong> " + obj.last_checked + "</p>";
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Date Closed:</strong> " + obj.date_closed + "</p>";
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Description:</strong> " + obj.description + "</p>";
+		  
+		  ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Ticket Number: </strong> " + obj.ticketNum + "</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Assigned:          </strong> " + obj.is_assigned +"</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Priority:            </strong> " + obj.priority +"</pre><br>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Date Created:   </strong> " + obj.date_created + "</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Due Date:         </strong> " + obj.due_date + "</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Last Checked:  </strong> " + obj.last_checked + "</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Date Closed:    </strong> " + obj.date_closed + "</pre><br>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Description:     </strong> " + obj.description + "</pre>";
           techAssigned = obj.is_assigned;
+	
           
           /*
           We know the second object will be the user who submitted the ticket
           */
           var obj = jsonReturn[1];
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Submitted by:</strong> " + obj.username_id__username +  " (" + obj.user_group + ")</p>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Submitted by:  </strong> " + obj.username_id__username +  " (" + obj.user_group + ")</pre>";
 
           /*
           Loop through any remaining jsonReturn objects.  We know the third querty set contains
@@ -54,7 +56,7 @@ function getTicketInfo(ticket){
             // Grabs the comments from the json
             else {
               commentCount++
-              ticketTable.innerHTML += "<p id='ticketInfo'><strong>Comment:</strong> "+ commentCount + "</p>";
+              ticketTable.innerHTML += "<br><p id='ticketInfo'><strong>Comment:</strong> "+ commentCount + "</p>";
               ticketTable.innerHTML += "<p id='ticketInfo'><strong>Message:</strong> " + obj.message + "</p>";
               ticketTable.innerHTML += "<p id='ticketInfo'><strong>From:</strong> " + obj.user__username +  " (" + obj.user__profile__user_group + ")</p>";
               ticketTable.innerHTML += "<p id='ticketInfo'><strong>Date Entered:</strong> " + obj.date_entered + "</p>";
