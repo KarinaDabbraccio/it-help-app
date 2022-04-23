@@ -217,3 +217,17 @@ margin-left:4px;
     width: 15px;
   }
 
+  /* Stylings for single ticket view */
+  #title {
+    font-size: 25px;
+    font-weight: bold;
+    color: darkblue;
+    font-family: 'Dosis', sans-serif;
+  }
+
+   #ticketInfo {
+    font-size: 18px;
+    font-family: 'Dosis', sans-serif;
+  }
+
+

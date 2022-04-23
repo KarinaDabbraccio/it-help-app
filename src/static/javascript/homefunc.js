@@ -24,21 +24,21 @@ function getTicketInfo(ticket){
           we know the first object in jsonReturn will be the ticket
           */
           var obj = jsonReturn[0];
-          ticketTable.innerHTML += "<p>Ticket Number: " + obj.ticketNum + " - " + obj.title + "</p>";
-          ticketTable.innerHTML += "<p>Assigned: " + obj.is_assigned +"</p>";
-          ticketTable.innerHTML += "<p>Priority: " + obj.priority +"</p>";
-          ticketTable.innerHTML += "<p>Date Created: " + obj.date_created + "</p>";
-          ticketTable.innerHTML += "<p>Due Date: " + obj.due_date + "</p>";
-          ticketTable.innerHTML += "<p>Last Checked: " + obj.last_checked + "</p>";
-          ticketTable.innerHTML += "<p>Date Closed: " + obj.date_closed + "</p>";
-          ticketTable.innerHTML += "<p>Description: " + obj.description + "</p>";
+          ticketTable.innerHTML += "<p id='title'>Ticket Number: " + obj.ticketNum + " - <i>" + obj.title + "</i></p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Assigned:</strong> " + obj.is_assigned +"</p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Priority</strong>: " + obj.priority +"</p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Date Created:</strong> " + obj.date_created + "</p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Due Date:</strong> " + obj.due_date + "</p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Last Checked:</strong> " + obj.last_checked + "</p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Date Closed:</strong> " + obj.date_closed + "</p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Description:</strong> " + obj.description + "</p>";
           techAssigned = obj.is_assigned;
           
           /*
           We know the second object will be the user who submitted the ticket
           */
           var obj = jsonReturn[1];
-          ticketTable.innerHTML += "<p>Submitted by: " + obj.username_id__username +  " (" + obj.user_group + ")</p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong>Submitted by:</strong> " + obj.username_id__username +  " (" + obj.user_group + ")</p>";
 
           /*
           Loop through any remaining jsonReturn objects.  We know the third querty set contains
@@ -48,26 +48,26 @@ function getTicketInfo(ticket){
             var obj = jsonReturn[i];
             // Grabs the techs from the json
             if(!obj.message) {
-              ticketTable.innerHTML += "<p>Assigned Tech: " + obj.username_id__username +  " (" + obj.user_group + ")</p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong>Assigned Tech:</strong> " + obj.username_id__username +  " (" + obj.user_group + ")</p>";
             }
             // Grabs the comments from the json
             else {
               commentCount++
-              ticketTable.innerHTML += "<p>Comment "+ commentCount + "</p>";
-              ticketTable.innerHTML += "<p>Message: " + obj.message + "</p>";
-              ticketTable.innerHTML += "<p>From : " + obj.user__username +  " (" + obj.user__profile__user_group + ")</p>";
-              ticketTable.innerHTML += "<p>Date Entered: " + obj.date_entered + "</p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong>Comment:</strong> "+ commentCount + "</p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong>Message:</strong> " + obj.message + "</p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong>From:</strong> " + obj.user__username +  " (" + obj.user__profile__user_group + ")</p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong>Date Entered:</strong> " + obj.date_entered + "</p>";
             }
           }
 
           //Lets user know if no tech is assigned to ticket
           if (!techAssigned){
-            ticketTable.innerHTML += "<p>There is no tech assigned to this ticket</p>";
+            ticketTable.innerHTML += "<p id='ticketInfo'><strong><i>There is no tech assigned to this ticket</i></strong></p>";
           }
 
           //Lets user know there are no comments
           if (commentCount ==0){
-            ticketTable.innerHTML += "<p>There are no comments! Would you like to add one?</p>";
+            ticketTable.innerHTML += "<p id='ticketInfo'><strong><i>There are no comments! Would you like to add one?</i></strong></p>";
           }
         }
       }
