@@ -21,5 +21,4 @@ def sort(tickets):
 def as_view(request):
     tickets = [ticket for ticket in Ticket.objects.all()]
     sort(tickets)
-    print(tickets)
     return render(request, 'home.html', {'tickets': tickets})

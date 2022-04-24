@@ -90,6 +90,24 @@
       }
     },
     {
+        "model": "auth.user",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$cKMO6GPt5jwWltNiCgFnsJ$vTSBNgL3mXkxGYFBxOmtgy3rwCINCjI5EEU0AgybsRI=",
+            "last_login": null,
+            "is_superuser": true,
+            "username": "admin_tester",
+            "first_name": "Test",
+            "last_name": "Account",
+            "email": "admin@example.org",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2022-04-24T01:35:58.871Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
       "model": "src.ticket",
       "pk": 1,
       "fields": {

@@ -45,8 +45,10 @@ Clears all the current data in your database
 `python manage.py loaddata data_init.json` 
 Overwrites the first 5/6 rows of data for each model, including any superusers
 
+An admin with the username `admin_tester` and password `P455w0rd!` will be created.
+OR
+You can create your own admin account with the following command.
 `python manage.py createsuperuser` 
-Follow the instructions to create your own user for admin login
 
 See the [Django Docs](https://docs.djangoproject.com/en/4.0/) for more info.
 
