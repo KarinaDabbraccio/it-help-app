@@ -180,6 +180,21 @@
       }
     },
     {
+        "model": "src.ticket",
+        "pk": 7,
+        "fields": {
+            "is_assigned": false,
+            "status": "O",
+            "priority": "R",
+            "title": "Connectivity Issue",
+            "description": "",
+            "date_created": "2022-04-24T01:24:23.835Z",
+            "last_checked": null,
+            "due_date": "2022-04-28T00:00:00Z",
+            "date_closed": null
+        }
+    },
+    {
       "model": "src.comment",
       "pk": 1,
       "fields": {
