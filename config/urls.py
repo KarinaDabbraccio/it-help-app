@@ -18,7 +18,7 @@ from django.urls import include, path
 from src.views import index, home, login, newTicket, searchticket, getticketinfo
 
 urlpatterns = [
-    path('', index.as_view, name='index'),
+    path('', home.as_view, name='home'),
     path('app/', include('src.urls')),
     path('admin/', admin.site.urls),
     path('home/', home.as_view, name='home'),
