@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+    {% block content %}
+    <div class="sign-in-form" style="width:1000px;height:400px;margin-top: 7em;">
+      <form id="newComment"  action="/newcomment/" method="POST">
+          {% csrf_token %}
+        <h3>New Comment</h3>
+
+
+        <input id = "ticket" type = "hidden" name = "ticketNum">
+        <script>
+          let ticketNum = new URLSearchParams(window.location.search).get('ticketNum');
+          document.getElementById("ticket").value = ticketNum;
+        </script>
+
+        <p></p>
+        <br><br>
+        <textarea rows = "5" cols = "60" name = "message" placeholder="Please comment here..."></textarea>
+        <br><br>
+        <input type="submit" id="submit" value="Submit">
+      </form>
+        {{error}}
+
+    </div>
+    {% endblock %}

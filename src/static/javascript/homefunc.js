@@ -35,6 +35,7 @@ function getTicketInfo(ticket){
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Date Closed:    </strong> " + obj.date_closed + "</pre><br>";
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Description:     </strong> " + obj.description + "</pre>";
           techAssigned = obj.is_assigned;
+          var currentTicket = obj.ticketNum;
 	
           
           /*
@@ -72,6 +73,8 @@ function getTicketInfo(ticket){
           if (commentCount ==0){
             ticketTable.innerHTML += "<p id='ticketInfo'><strong><i>There are no comments! Would you like to add one?</i></strong></p>";
           }
+
+          ticketTable.innerHTML += "<p><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</a></p>";
         }
       }
   )
