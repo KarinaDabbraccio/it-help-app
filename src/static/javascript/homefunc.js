@@ -82,7 +82,7 @@ function getTicketInfo(ticket){
             ticketTable.innerHTML += "<p id='ticketInfo'><strong><i>There are no comments! Would you like to add one?</i></strong></p>";
           }
 
-          ticketTable.innerHTML += "<p><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</a></p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</strong></a></p>";
         }
       }
   )
