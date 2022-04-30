@@ -24,11 +24,15 @@ def as_view(request):
     currentUser = Profile.objects.get(username_id=request.user)
     currentUserGroup = getattr(currentUser, 'user_group')
 
+ 
     if(currentUserGroup == 'U'):
         ticketQuery = Ticket.objects.filter(profile__username_id=request.user)
+        noshow = "noshow"
     else:
         ticketQuery = Ticket.objects.all()
+        noshow = "show"
 
     tickets = [ticket for ticket in ticketQuery]
     sort(tickets)
-    return render(request, 'home.html', {'tickets': tickets})
+    return render(request, 'home.html', {'tickets': tickets, 'noshow':noshow})
+

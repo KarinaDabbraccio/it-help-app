@@ -226,4 +226,6 @@ margin-left:4px;
     color: midnightblue;
   }
 
-
+.noshow {
+  display: none;
+}

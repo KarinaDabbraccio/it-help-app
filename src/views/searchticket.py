@@ -13,12 +13,16 @@ from django.core.serializers.json import DjangoJSONEncoder
 @login_required(login_url='/login')
 def as_view(request):
         if request.method == 'POST':
-                if 'alltickets' in request.POST:
+                #check to see who is logged in
+                currentUser = Profile.objects.get(username_id=request.user)
+                currentUserGroup = getattr(currentUser, 'user_group')
+
+                if ('alltickets' in request.POST) and (currentUserGroup=='T'):
                     status = ""
                     priority = ""
                     assigned = "A"
                     postInfo = ""
-                elif 'mytickets' in request.POST:
+                elif ('mytickets' in request.POST) or (('alltickets' in request.POST) and (currentUserGroup=='U')):
                     result = Profile.objects.get(username=request.user)
                     jsonReturn = json.dumps(list(result.user_ticket.all().values()), indent = 4, sort_keys = True, default = str)
                     return JsonResponse(jsonReturn, safe=False)
