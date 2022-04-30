@@ -17,15 +17,19 @@ def as_view(request):
                 currentUser = Profile.objects.get(username_id=request.user)
                 currentUserGroup = getattr(currentUser, 'user_group')
 
+                #Shows all tickers if current user is a Tech
                 if ('alltickets' in request.POST) and (currentUserGroup=='T'):
                     status = ""
                     priority = ""
                     assigned = "A"
                     postInfo = ""
-                elif ('mytickets' in request.POST) or (('alltickets' in request.POST) and (currentUserGroup=='U')):
+                #Only shows current user's tickets if current user is 'User'
+                elif 'mytickets' in request.POST:
                     result = Profile.objects.get(username=request.user)
                     jsonReturn = json.dumps(list(result.user_ticket.all().values()), indent = 4, sort_keys = True, default = str)
                     return JsonResponse(jsonReturn, safe=False)
+
+                #Filter
                 else:
                     postInfo = request.POST['post_id']
                     status = request.POST['status']
@@ -39,16 +43,33 @@ def as_view(request):
                     assigned = False
                 elif assigned == "AS":
                     assigned = True
-                if postInfo.isdigit():
-                    if assigned =="A":
-                        result = Ticket.objects.filter(ticketNum__icontains=postInfo, status__contains=status, priority__contains=priority)
+
+                #Filters ALL tickets if current user is a Tech
+                if currentUserGroup =='T':
+                    if postInfo.isdigit():
+                        if assigned =="A":
+                            result = Ticket.objects.filter(ticketNum__icontains=postInfo, status__contains=status, priority__contains=priority)
+                        else:
+                            result = Ticket.objects.filter(ticketNum__icontains=postInfo, status__contains=status, priority__contains=priority,is_assigned=assigned)
                     else:
-                        result = Ticket.objects.filter(ticketNum__icontains=postInfo, status__contains=status, priority__contains=priority,is_assigned=assigned)
+                        if assigned =="A":
+                            result = Ticket.objects.filter(title__icontains=postInfo, status__contains=status, priority__contains=priority)
+                        else:
+                            result = Ticket.objects.filter(title__icontains=postInfo, status__contains=status, priority__contains=priority,is_assigned=assigned)
+                
+                #Filters only current user tickets if current user is 'User'
                 else:
-                    if assigned =="A":
-                        result = Ticket.objects.filter(title__icontains=postInfo, status__contains=status, priority__contains=priority)
+                    if postInfo.isdigit():
+                        if assigned =="A":
+                            result = Ticket.objects.filter(ticketNum__icontains=postInfo, status__contains=status, priority__contains=priority).filter(profile__username_id=request.user)
+                        else:
+                            result = Ticket.objects.filter(ticketNum__icontains=postInfo, status__contains=status, priority__contains=priority,is_assigned=assigned).filter(profile__username_id=request.user)
                     else:
-                        result = Ticket.objects.filter(title__icontains=postInfo, status__contains=status, priority__contains=priority,is_assigned=assigned)
+                        if assigned =="A":
+                            result = Ticket.objects.filter(title__icontains=postInfo, status__contains=status, priority__contains=priority).filter(profile__username_id=request.user)
+                        else:
+                            result = Ticket.objects.filter(title__icontains=postInfo, status__contains=status, priority__contains=priority,is_assigned=assigned).filter(profile__username_id=request.user)
+                      
                 result = result.order_by('ticketNum')
                 jsonReturn = json.dumps(list(result.values()), indent = 4, sort_keys = True, default = str)
                 return JsonResponse(jsonReturn, safe=False)
