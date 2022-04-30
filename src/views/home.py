@@ -19,6 +19,16 @@ def sort(tickets):
 
 @login_required(login_url='/login')
 def as_view(request):
-    tickets = [ticket for ticket in Ticket.objects.all()]
+
+    #check to see who is logged in
+    currentUser = Profile.objects.get(username_id=request.user)
+    currentUserGroup = getattr(currentUser, 'user_group')
+
+    if(currentUserGroup == 'U'):
+        ticketQuery = Ticket.objects.filter(profile__username_id=request.user)
+    else:
+        ticketQuery = Ticket.objects.all()
+
+    tickets = [ticket for ticket in ticketQuery]
     sort(tickets)
     return render(request, 'home.html', {'tickets': tickets})
