@@ -26,10 +26,8 @@ margin-left:4px;
 
 .page-header {
     background: gainsboro;
-    max-height: 3em;
-    padding: 2em;
-    padding-left: 3em;
-	padding-bottom: 3.5em;
+	padding:20px 50px 20px;
+	margin:0px;
 	font-family: 'Dosis', sans-serif;
     left: 0;
     top: 0;
@@ -47,10 +45,10 @@ margin-left:4px;
 	  margin-right: 0.5em;
   }
   
-  .page-footer {
+.page-footer {
     background: gainsboro;
-    max-height: 2em;
-    padding: 2em;
+	padding:20px 50px 20px;
+	max-height:40px;
     position: fixed;
       bottom:0;
       left:0;
@@ -59,63 +57,34 @@ margin-left:4px;
     text-align: left;
     font-family: 'Dosis', sans-serif;
     color: darkblue;
+	margin:0px;
   }
   
-  .sign-in-form {
-    margin: auto;
-    margin-top: 10em;
-    width: 200px;
-    height: 300px;
-    background-color: aliceblue;
-    padding: 10px;
-    text-align: center;
-    font-size: 20px;
-    color: darkblue;
-    font-family: 'Dosis', sans-serif;
-  }
-  .inputFields{
-    height: 2em;
-  }
-  #submit {
-    background-color: blue;
-    color: white;
-    width: 50%;
-    height: 2em;
-    border: none;
-  }
+  /* Content : block between header & footer*/
   .content{
-
-    height: 430px;
-    }
-	
-  /* Container for flexboxes */
-  section {
-    margin-top: 10em;
-    display: -webkit-flex;
-    display: flex;
-    padding-left: 3em;
-    padding-right: 3em;
-  }
-  
-  /* Style the navigation menu */
-  nav {
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    background: #ccc;
-    padding: 20px;
-  }
-  
-  .ticket-nav {
+	margin:auto;
 	font-family:Verdana;
-    background-color: aliceblue;  
+    }
+  
+  /* Home page - Menu */
+  .ticket-nav {
+	background-color: aliceblue;
     color: darkblue;
-    display:inline-block;
-    margin-left:5%;
-    width:15%;
-    height:100%;
-    float: left;
-    padding:5%;
+	float: left;
+	margin:50px;
+	padding: 35px 50px 35px 50px;
+	border: 2px solid midnightblue;
+  }
+  
+  /* Home page - List of tickets */
+  .ticketTable{
+	  background-color: white; 
+	  float: left;
+      padding: 14px;
+      width: 65%;
+	  overflow: auto;
+	  margin-bottom:80px;
+	  font-size: 14px;
   }
   
   .ticket-nav li a {
@@ -123,7 +92,6 @@ margin-left:4px;
   }
   
   td {
-	 font-family:Verdana;
 	 font-size: 16px;
 	 line-height: 2;
   }
@@ -132,23 +100,47 @@ margin-left:4px;
 	  width:100%;
   }
   
-  .ticketTable{
-      display:inline-block;
-      margin-left:1%; 
-      width:65%;
-      overflow: auto;
-      height:500px;
-	  font-family: Verdana;
-	  font-size: 14px;
-  }
   .ticketInfo:hover {
-  background-color: aliceblue;
+    background-color: aliceblue;
 }
   .ticketInfo{
-	  padding-bottom:3px;
-  border-bottom: 3px solid darkblue;
+	padding-bottom:3px;
+	border-bottom: 3px solid darkblue;
   }
  
+  /* Login page */
+  .sign-in-form {
+    margin: auto;
+	margin-top:50px;
+	padding: 35px 50px 35px 50px;
+	border: 2px solid midnightblue;
+	width: 260px;
+    background-color: aliceblue;
+    text-align: center;
+    font-size: 20px;
+    color: darkblue;
+    font-family: 'Dosis', sans-serif;
+  }
+  
+  form{
+	  padding:1em;
+  }
+  
+  textarea{
+	  font-family:Verdana;
+  }
+  
+  .inputFields{
+    height: 2em;
+  }
+  
+  #submit {
+    background-color: darkblue;
+    color: white;
+    width: 120px;
+    height: 2em;
+    border: none;
+  }
   
   /* Style the list inside the menu */
   nav ul {
@@ -221,10 +213,9 @@ margin-left:4px;
   #title {
     font-size: 18px;
     color: darkblue;
-    font-family: Verdana;
-	padding: 10px;
+	padding: 7px;
 	margin-bottom: 10px;
-    border-bottom: 3px solid darkblue;
+    border-bottom: 2px solid darkblue;
   }
 
    #ticketInfo {

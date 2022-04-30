@@ -26,8 +26,16 @@ function getTicketInfo(ticket){
           var obj = jsonReturn[0];
           ticketTable.innerHTML += "<p id='title'><strong>" + obj.title + "</strong></p>";
 		  
+		  if (obj.is_assigned == true){
+					assigned = "True";
+					mark = "&#x2713;"
+				}else{
+					assigned = "False"
+					mark = "&#x2715;"
+				}	  
+		  
 		  ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Ticket Number: </strong> " + obj.ticketNum + "</pre>";
-          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Assigned:          </strong> " + obj.is_assigned +"</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Assigned:          </strong> <b class='assigned"+assigned+"'>" + mark +"</b></pre>";		  
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Priority:            </strong> " + obj.priority +"</pre><br>";
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Date Created:   </strong> " + obj.date_created + "</pre>";
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Due Date:         </strong> " + obj.due_date + "</pre>";
@@ -74,7 +82,7 @@ function getTicketInfo(ticket){
             ticketTable.innerHTML += "<p id='ticketInfo'><strong><i>There are no comments! Would you like to add one?</i></strong></p>";
           }
 
-          ticketTable.innerHTML += "<p><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</a></p>";
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</strong></a></p>";
         }
       }
   )
