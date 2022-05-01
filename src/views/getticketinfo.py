@@ -40,7 +40,8 @@ def as_view(request):
                 userResult = Profile.objects.filter(user_ticket=request.POST["ticketNum"]).filter(user_group='U')
                 techResult = Profile.objects.filter(user_ticket=request.POST["ticketNum"]).filter(user_group='T')
                 commentResult = Comment.objects.filter(ticketNum=request.POST["ticketNum"]).order_by('date_entered')
-                result = chain(ticketResult.values(),
+                result = chain(currentUserGroup,
+                        ticketResult.values(),
                         userResult.values('username_id__username', 'user_group'),
                         techResult.values('username_id__username', 'user_group'),
                         commentResult.values('message', 'user__username', 'user__profile__user_group', 'date_entered'))      

@@ -18,12 +18,14 @@ function getTicketInfo(ticket){
           ticketTable.innerHTML = "";
           var commentCount = 0;
           var techAssigned = false;
+          var currentUserGroup = jsonReturn[0] //grabs fist object from json which is current user's group
+
 
           /*
           Since we are only passing 1 ticket with the possibily of multiple users and comments,
-          we know the first object in jsonReturn will be the ticket
+          we know the next object in jsonReturn will be the ticket
           */
-          var obj = jsonReturn[0];
+          var obj = jsonReturn[1];
           ticketTable.innerHTML += "<p id='title'><strong>" + obj.title + "</strong></p>";
 		  
           if (obj.is_assigned == true){
@@ -54,16 +56,16 @@ function getTicketInfo(ticket){
 	
           
           /*
-          We know the second object will be the user who submitted the ticket
+          We know the following object will be the user who submitted the ticket
           */
-          var obj = jsonReturn[1];
+          var obj = jsonReturn[2];
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Submitted by:  </strong> " + obj.username_id__username +  " (" + obj.user_group + ")</pre>";
 
           /*
-          Loop through any remaining jsonReturn objects.  We know the third querty set contains
+          Loop through any remaining jsonReturn objects.  We know the fourth querty set contains
           1 or more techs assigned to the ticket.  We will pull these out first then comments
           */
-          for(var i = 2; i < jsonReturn.length; i++) {
+          for(var i = 3; i < jsonReturn.length; i++) {
             var obj = jsonReturn[i];
             // Grabs the techs from the json
             if(!obj.message) {
@@ -89,16 +91,21 @@ function getTicketInfo(ticket){
             ticketTable.innerHTML += "<p id='ticketInfo'><strong><i>There are no comments! Would you like to add one?</i></strong></p>";
           }
           //Link to add comments to current ticket
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</strong></a></p>";
+          ticketTable.innerHTML += "<br><p id='ticketInfo'><strong><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</strong></a></p>";
 
-          //link for assigning ticket
-          ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/assign?ticketNum=" + currentTicket + "'>Assign Ticket</strong></a></p>";
-
-          if (ticketStatus == "Open") {
-            ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/close?ticketNum=" + currentTicket + "'>Close Ticket</strong></a></p>";
-          } else {
-            ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/open?ticketNum=" + currentTicket + "'>Re-Open Ticket</strong></a></p>";
+          // Hides assigning, opening and closing tickets from 'User'
+          if (currentUserGroup == 'T') {
+            //assign ticket
+            ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/assign?ticketNum=" + currentTicket + "'>Assign Ticket</strong></a></p>";
+            //close ticket
+            if (ticketStatus == "Open") {
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/close?ticketNum=" + currentTicket + "'>Close Ticket</strong></a></p>";
+              //open ticket
+            } else {
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/open?ticketNum=" + currentTicket + "'>Re-Open Ticket</strong></a></p>";
+            }
           }
+
         }
       }
   )
