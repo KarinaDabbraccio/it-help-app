@@ -1,6 +1,7 @@
 from src.models import *
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 
 
@@ -49,6 +50,7 @@ def close(request):
     if request.method =='POST':
         if request.POST["submit"] == "Yes":
             Ticket.objects.filter(ticketNum=request.POST["ticketNum"]).update(status='C')
+            Ticket.objects.filter(ticketNum=request.POST["ticketNum"]).update(date_closed=timezone.now())
             return redirect('/home')
         else:
             return redirect('/home')
@@ -65,6 +67,7 @@ def open(request):
     if request.method =='POST':
         if request.POST["submit"] == "Yes":
             Ticket.objects.filter(ticketNum=request.POST["ticketNum"]).update(status='O')
+            Ticket.objects.filter(ticketNum=request.POST["ticketNum"]).update(date_closed=None)
             return redirect('/home')
         else:
             return redirect('/home')
