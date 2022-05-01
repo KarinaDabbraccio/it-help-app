@@ -41,9 +41,31 @@ def assign(request):
 #Closes current ticket
 @login_required(login_url='/login')
 def close(request):
-    return redirect('/home')
+
+    if request.method =='GET':
+        currentTicket = Ticket.objects.get(ticketNum=request.GET["ticketNum"])
+        ticketTitle = currentTicket.title
+
+    if request.method =='POST':
+        if request.POST["submit"] == "Yes":
+            Ticket.objects.filter(ticketNum=request.POST["ticketNum"]).update(status='C')
+            return redirect('/home')
+        else:
+            return redirect('/home')
+    return render(request, 'close.html', {'ticketTitle': ticketTitle})
 
 #Re-opens current ticket
 @login_required(login_url='/login')
 def open(request):
-    return redirect('/home')
+
+    if request.method =='GET':
+        currentTicket = Ticket.objects.get(ticketNum=request.GET["ticketNum"])
+        ticketTitle = currentTicket.title
+
+    if request.method =='POST':
+        if request.POST["submit"] == "Yes":
+            Ticket.objects.filter(ticketNum=request.POST["ticketNum"]).update(status='O')
+            return redirect('/home')
+        else:
+            return redirect('/home')
+    return render(request, 'open.html', {'ticketTitle': ticketTitle})

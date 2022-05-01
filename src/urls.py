@@ -7,5 +7,7 @@ urlpatterns = [
     path('', searchticket.as_view, name='searchticket'),
     path('', getticketinfo.as_view, name='getticket'),
     path('', newComment.as_view, name='newcommnet'),
-    path('', techOptions.assign, name='assign')
+    path('', techOptions.assign, name='assign'),
+    path('', techOptions.close, name='close'),
+    path('', techOptions.open, name='open'),
 ]
