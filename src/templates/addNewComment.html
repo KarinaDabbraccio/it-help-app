@@ -4,8 +4,8 @@
     <div class="sign-in-form" style="width:450px;">
       <form id="newComment"  action="/newcomment/" method="POST">
           {% csrf_token %}
-        <h3>New Comment</h3>
-
+        <h3>Add new comment to ticket:</h3>
+        <p>{{ticketTitle}}</p>
 
         <input id = "ticket" type = "hidden" name = "ticketNum">
         <script>
@@ -13,7 +13,6 @@
           document.getElementById("ticket").value = ticketNum;
         </script>
 
-        <!--<p></p>-->
         <br>
         <textarea rows = "5" cols = "48" name = "message" placeholder="Please comment here..."></textarea>
         <br><br>
