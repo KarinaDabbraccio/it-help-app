@@ -27,5 +27,7 @@ urlpatterns = [
     path('searchticket/', searchticket.as_view, name='searchticket'),
     path('getticket/', getticketinfo.as_view, name='getticket'),
     path('newcomment/', newComment.as_view, name='newcomment'),
-    path('assign/', techOptions.assign, name='assign')
+    path('assign/', techOptions.assign, name='assign'),
+    path('close/', techOptions.close, name='close'),
+    path('open/', techOptions.open, name='open'),
 ]

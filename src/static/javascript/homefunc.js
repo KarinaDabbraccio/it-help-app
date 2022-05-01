@@ -26,15 +26,22 @@ function getTicketInfo(ticket){
           var obj = jsonReturn[0];
           ticketTable.innerHTML += "<p id='title'><strong>" + obj.title + "</strong></p>";
 		  
-		  if (obj.is_assigned == true){
-					assigned = "True";
-					mark = "&#x2713;"
-				}else{
-					assigned = "False"
-					mark = "&#x2715;"
-				}	  
-		  
-		  ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Ticket Number: </strong> " + obj.ticketNum + "</pre>";
+          if (obj.is_assigned == true){
+              assigned = "True";
+              mark = "&#x2713;"
+            }else{
+              assigned = "False"
+              mark = "&#x2715;"
+            }	
+          var ticketStatus
+          if (obj.status == "O") {
+            ticketStatus = "Open"
+          } else {
+            ticketStatus = "Close"
+          }
+
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Ticket Number: </strong> " + obj.ticketNum + "</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Status:              </strong> " + ticketStatus + "</pre>";
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Assigned:          </strong> <b class='assigned"+assigned+"'>" + mark +"</b></pre>";		  
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Priority:            </strong> " + obj.priority +"</pre><br>";
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Date Created:   </strong> " + obj.date_created + "</pre>";
@@ -84,8 +91,14 @@ function getTicketInfo(ticket){
           //Link to add comments to current ticket
           ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</strong></a></p>";
 
-          //button for assigning ticket
+          //link for assigning ticket
           ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/assign?ticketNum=" + currentTicket + "'>Assign Ticket</strong></a></p>";
+
+          if (ticketStatus == "Open") {
+            ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/close?ticketNum=" + currentTicket + "'>Close Ticket</strong></a></p>";
+          } else {
+            ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/open?ticketNum=" + currentTicket + "'>Re-Open Ticket</strong></a></p>";
+          }
         }
       }
   )
