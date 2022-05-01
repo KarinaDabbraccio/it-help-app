@@ -83,6 +83,9 @@ function getTicketInfo(ticket){
           }
           //Link to add comments to current ticket
           ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</strong></a></p>";
+
+          //button for assigning ticket
+          ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/assign?ticketNum=" + currentTicket + "'>Assign Ticket</strong></a></p>";
         }
       }
   )

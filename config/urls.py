@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from src.views import index, home, login, newComment, newTicket, searchticket, getticketinfo, newComment
+from src.views import index, home, login, newComment, newTicket, searchticket, getticketinfo, newComment, techOptions
 
 urlpatterns = [
     path('', home.as_view, name='home'),
@@ -26,5 +26,6 @@ urlpatterns = [
     path('newticket/', newTicket.as_view, name='newticket'),
     path('searchticket/', searchticket.as_view, name='searchticket'),
     path('getticket/', getticketinfo.as_view, name='getticket'),
-    path('newcomment/', newComment.as_view, name='newcomment')
+    path('newcomment/', newComment.as_view, name='newcomment'),
+    path('assign/', techOptions.assign, name='assign')
 ]
