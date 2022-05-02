@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 
     {% block content %}
-    <div class="sign-in-form" style="width:450px;">
+    <div class="sign-in-form" style="width:450px; border-radius: 25px">
       <form id="assign"  action="/assign/" method="POST">
           {% csrf_token %}
         <h3>Would you like to be assigned to ticket:</h3>
@@ -16,10 +16,10 @@
         <br><br>
         {% if isAssigned == True %}
         <p>You are already assigned to this ticket!</p>
-        <input type="submit" id="submit" value="Back" name = "submit">
+        <input type="submit" id="submit" value="Back" name = "submit" style="border-radius: 25px" >
         {% else %}
-        <input type="submit" id="submit" value="Yes" name = "submit">
-        <input type="submit" id="submit" value="No" name = "submit">
+        <input type="submit" id="submit" value="Yes" name = "submit" style="border-radius: 25px" >
+        <input type="submit" id="submit" value="No" name = "submit" style="border-radius: 25px" >
         {% endif %}
 
       </form>

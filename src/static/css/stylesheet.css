@@ -229,3 +229,7 @@ margin-left:4px;
 .noshow {
   display: none;
 }
+
+pre {
+  word-wrap: break-word !important;
+}
