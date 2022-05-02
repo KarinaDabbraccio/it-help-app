@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 
     {% block content %}
-    <div class="sign-in-form" style="width:600px; border-radius: 25px">
+    <div class="sign-in-form" style="width:600px; border-radius: 25px; padding-bottom: 10px">
       <h3>Create New Ticket</h3> 
 	  <form id="newTicket"  action="/newticket/" method="POST">
           {% csrf_token %}
@@ -15,7 +15,7 @@
               <option value="E">Emergency</option>
             </select>
           <br><br>
-          <h4>Description</h4>
+          <h4 style="padding-bottom: 5px">Description</h4>
          <textarea rows = "8" cols = "60" name = "description" placeholder="Please enter issue here..."></textarea>
         <br><br>
         <input type="submit" id="submit" value="Submit" style="border-radius: 25px" >
