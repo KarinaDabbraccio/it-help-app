@@ -16,13 +16,14 @@
             </select>
           <br><br>
           {% if currentUserGroup == 'T' %}
-          Add User:
+          Create Ticket for User:
           <select name="users">
 
           {% for user in users %}
             <option value="{{user.username}}">{{user.username}}</option>
           {% endfor %}
           </select>
+          <br><br>
           {% endif %}
          <textarea rows = "8" cols = "60" name = "description" placeholder="Please enter issue here..."></textarea>
         <br><br>
