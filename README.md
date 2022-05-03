@@ -45,7 +45,7 @@ Clears all the current data in your database
 `python manage.py loaddata data_init.json` 
 Overwrites the first 5/6 rows of data for each model, including any superusers
 
-An admin with the username `admin_tester` and password `P455w0rd!` will be created.
+An admin with the username `admin_tester` and password `P455w0rd!` will be created. All other accounts have the password `ithelpticket`.
 
 OR
 
