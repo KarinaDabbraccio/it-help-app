@@ -30,7 +30,7 @@ def as_view(request):
                 #check to see who is logged in
                 currentUser = Profile.objects.get(username_id=request.user)
                 currentUserGroup = getattr(currentUser, 'user_group')
-                
+
                 #if login is tech update last checked in ticket
                 if(currentUserGroup == 'T') :
                         Ticket.objects.filter(ticketNum=request.POST["ticketNum"]).update(last_checked=timezone.now())

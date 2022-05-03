@@ -1,7 +1,17 @@
 function getTicketInfo(ticket){
+  const priority = {
+    E: 'Emergency',
+    U: 'Urgent',
+    R: 'Routine'
+  };
+
+  const userGroup = {
+    U: 'User',
+    T: 'Admin'
+  };
+
   let allTickets = "alltickets";
   let token = getCookie("csrftoken");
-  console.log("test");
 
   $.ajax(
     {
@@ -18,58 +28,51 @@ function getTicketInfo(ticket){
           ticketTable.innerHTML = "";
           var commentCount = 0;
           var techAssigned = false;
-          var currentUserGroup = jsonReturn[0] //grabs fist object from json which is current user's group
-
-
+          // var currentUserGroup = jsonReturn[1] //grabs fist object from json which is current user's group
+          const userInfo = jsonReturn[1];
           /*
           Since we are only passing 1 ticket with the possibily of multiple users and comments,
           we know the next object in jsonReturn will be the ticket
           */
-          var obj = jsonReturn[1];
-          ticketTable.innerHTML += "<p id='title'><strong>" + obj.title + "</strong></p>";
+          const ticketInfo = jsonReturn[0];
+          ticketTable.innerHTML += "<p id='title'><strong>" + ticketInfo.title + "</strong></p>";
 		  
-          if (obj.is_assigned == true){
+          if (ticketInfo.is_assigned){
               assigned = "True";
               mark = "&#x2713;"
+              techAssigned = true;
             }else{
               assigned = "False"
               mark = "&#x2715;"
             }	
-          var ticketStatus
-          if (obj.status == "O") {
-            ticketStatus = "Open"
-          } else {
-            ticketStatus = "Close"
-          }
+          const ticketStatus = ticketInfo.status == "O" ? "Open" : "Close";
 
-          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Ticket Number: </strong> " + obj.ticketNum + "</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Ticket Number: </strong> " + ticketInfo.ticketNum + "</pre>";
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Status:              </strong> " + ticketStatus + "</pre>";
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Assigned:          </strong> <b class='assigned"+assigned+"'>" + mark +"</b></pre>";		  
-          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Priority:            </strong> " + obj.priority +"</pre><br>";
-          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Date Created:   </strong> " + obj.date_created + "</pre>";
-          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Due Date:         </strong> " + obj.due_date + "</pre>";
-          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Last Checked:  </strong> " + obj.last_checked + "</pre>";
-          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Date Closed:    </strong> " + obj.date_closed + "</pre><br>";
-          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Description:     </strong> " + obj.description + "</pre>";
-          techAssigned = obj.is_assigned;
-          var currentTicket = obj.ticketNum;
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Priority:            </strong> " + priority[ticketInfo.priority] +"</pre><br>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Date Created:   </strong> " + (ticketInfo.date_created ? new Date(ticketInfo.date_created).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'medium' }) : '-' ) + "</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Due Date:         </strong> " + (ticketInfo.due_date ? new Date(ticketInfo.due_date).toLocaleDateString('en-US', { dateStyle: 'long'}) + ', midnight' : '-') + "</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Last Checked:  </strong> " + (ticketInfo.last_checked ? new Date(ticketInfo.last_checked).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'medium' }) : '-') + "</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Date Closed:    </strong> " + (ticketInfo.date_closed ? new Date(ticketInfo.date_closed).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'medium' }) : '-' ) + "</pre><br>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Description:     </strong> " + ticketInfo.description + "</pre>";
+          var currentTicket = ticketInfo.ticketNum;
 	
           
           /*
           We know the following object will be the user who submitted the ticket
           */
-          var obj = jsonReturn[2];
-          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Submitted by:  </strong> " + obj.username_id__username +  " (" + obj.user_group + ")</pre>";
+          ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Submitted by:  </strong> " + userInfo.username_id__username +  " (" + userGroup[userInfo.user_group] + ")</pre>";
 
-          /*
-          Loop through any remaining jsonReturn objects.  We know the fourth querty set contains
-          1 or more techs assigned to the ticket.  We will pull these out first then comments
-          */
+          // /*
+          // Loop through any remaining jsonReturn objects.  We know the fourth querty set contains
+          // 1 or more techs assigned to the ticket.  We will pull these out first then comments
+          // */
           for(var i = 3; i < jsonReturn.length; i++) {
             var obj = jsonReturn[i];
             // Grabs the techs from the json
             if(!obj.message) {
-              ticketTable.innerHTML += "<p id='ticketInfo'><strong>Assigned Tech:</strong> " + obj.username_id__username +  " (" + obj.user_group + ")</p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong>Assigned Tech:</strong> " + obj.username_id__username +  " (" + userGroup[obj.user_group] + ")</p>";
             }
             // Grabs the comments from the json
             else {
@@ -83,26 +86,26 @@ function getTicketInfo(ticket){
 
           //Lets user know if no tech is assigned to ticket
           if (!techAssigned){
-            ticketTable.innerHTML += "<p id='ticketInfo'><strong><i>There is no tech assigned to this ticket</i></strong></p>";
+            ticketTable.innerHTML += "<br><p id='ticketInfo'><strong><i>There is no tech assigned to this ticket</i></strong></p>";
           }
 
-          //Lets user know there are no comments
-          if (commentCount ==0){
-            ticketTable.innerHTML += "<p id='ticketInfo'><strong><i>There are no comments! Would you like to add one?</i></strong></p>";
+          // //Lets user know there are no comments
+          if (commentCount == 0){
+            ticketTable.innerHTML += "<br><p id='ticketInfo'><strong><i>There are no comments! Would you like to add one?</i></strong></p>";
           }
-          //Link to add comments to current ticket
-          ticketTable.innerHTML += "<br><p id='ticketInfo'><strong><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</strong></a></p>";
+          // //Link to add comments to current ticket
+          ticketTable.innerHTML += "<br><p id='ticketInfo'><strong><a class='link' href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</strong></a></p>";
 
-          // Hides assigning, opening and closing tickets from 'User'
-          if (currentUserGroup == 'T') {
+          // // Hides assigning, opening and closing tickets from 'User'
+          if (userInfo.user_group == 'T') {
             //assign ticket
-            ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/assign?ticketNum=" + currentTicket + "'>Assign Ticket</strong></a></p>";
+            ticketTable.innerHTML += "<p id='ticketInfo'><strong><a class='link' href='/assign?ticketNum=" + currentTicket + "'>Assign Ticket</strong></a></p>";
             //close ticket
             if (ticketStatus == "Open") {
-              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/close?ticketNum=" + currentTicket + "'>Close Ticket</strong></a></p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a class='link' href='/close?ticketNum=" + currentTicket + "'>Close Ticket</strong></a></p>";
               //open ticket
             } else {
-              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/open?ticketNum=" + currentTicket + "'>Re-Open Ticket</strong></a></p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a class='link' href='/open?ticketNum=" + currentTicket + "'>Re-Open Ticket</strong></a></p>";
             }
           }
 
