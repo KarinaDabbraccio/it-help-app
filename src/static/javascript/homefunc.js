@@ -1,3 +1,7 @@
+const TICKET_INDEX = 1;
+const USER_INDEX = 2;
+const MIN_COMMENT_INDEX = 3;
+
 function getTicketInfo(ticket){
   const priority = {
     E: 'Emergency',
@@ -25,16 +29,17 @@ function getTicketInfo(ticket){
         {
           let ticketTable = document.getElementById("ticketDiv");
           let jsonReturn = JSON.parse(response);
+          console.log(jsonReturn);
           ticketTable.innerHTML = "";
           var commentCount = 0;
           var techAssigned = false;
           // var currentUserGroup = jsonReturn[1] //grabs fist object from json which is current user's group
-          const userInfo = jsonReturn[1];
+          const userInfo = jsonReturn[USER_INDEX];
           /*
           Since we are only passing 1 ticket with the possibily of multiple users and comments,
           we know the next object in jsonReturn will be the ticket
           */
-          const ticketInfo = jsonReturn[0];
+          const ticketInfo = jsonReturn[TICKET_INDEX];
           ticketTable.innerHTML += "<p id='title'><strong>" + ticketInfo.title + "</strong></p>";
 		  
           if (ticketInfo.is_assigned){
@@ -68,7 +73,7 @@ function getTicketInfo(ticket){
           // Loop through any remaining jsonReturn objects.  We know the fourth querty set contains
           // 1 or more techs assigned to the ticket.  We will pull these out first then comments
           // */
-          for(var i = 3; i < jsonReturn.length; i++) {
+          for(var i = MIN_COMMENT_INDEX; i < jsonReturn.length; i++) {
             var obj = jsonReturn[i];
             // Grabs the techs from the json
             if(!obj.message) {
@@ -115,9 +120,7 @@ function getTicketInfo(ticket){
               //assign to ticket
               ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/assign?ticketNum=" + currentTicket + "'>Assign to Ticket</strong></a></p>";
             }
-
           }
-
         }
       }
   )
