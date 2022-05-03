@@ -5,7 +5,7 @@
     {% endblock %}
     {% block content %}
 	  	  
-      <nav class="ticket-nav">
+      <nav class="ticket-nav" style="border-radius: 25px">
         <ul>
           <li><a href="#" onclick="MyTickets()">My Tickets</a>
           <li class="{{noshow}}"><a href="#" onclick="AllTickets()">All Tickets</a></li>
@@ -50,7 +50,7 @@
         </ul>
       </nav>
 	  
-        <div class="ticketTable" id="ticketDiv">
+        <div class="ticketTable" id="ticketDiv" style="word-wrap: break-word">
 
         {% for ticket in tickets %}
         <div onclick="getTicketInfo('{{ticket.ticketNum}}')" class="ticketInfo">

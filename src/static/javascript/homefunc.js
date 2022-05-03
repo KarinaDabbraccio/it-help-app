@@ -107,6 +107,15 @@ function getTicketInfo(ticket){
             } else {
               ticketTable.innerHTML += "<p id='ticketInfo'><strong><a class='link' href='/open?ticketNum=" + currentTicket + "'>Re-Open Ticket</strong></a></p>";
             }
+
+            if (isCurrentUserAssigned == "T") {
+              //un-assign from ticket
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/unassign?ticketNum=" + currentTicket + "'>Unassign from Ticket</strong></a></p>";
+            } else {
+              //assign to ticket
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/assign?ticketNum=" + currentTicket + "'>Assign to Ticket</strong></a></p>";
+            }
+
           }
 
         }

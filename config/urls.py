@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from src.views import index, home, login, newComment, newTicket, searchticket, getticketinfo, newComment, techOptions
+from src.views import index, home, login, newComment, newTicket, searchticket, getticketinfo, newComment, techOptions, logout
 
 urlpatterns = [
     path('', home.as_view, name='home'),
@@ -28,6 +28,8 @@ urlpatterns = [
     path('getticket/', getticketinfo.as_view, name='getticket'),
     path('newcomment/', newComment.as_view, name='newcomment'),
     path('assign/', techOptions.assign, name='assign'),
+    path('unassign/', techOptions.unassign, name='unassign'),
     path('close/', techOptions.close, name='close'),
     path('open/', techOptions.open, name='open'),
+    path('logout/', logout.as_view, name='logout')
 ]
