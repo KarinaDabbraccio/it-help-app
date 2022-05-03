@@ -19,13 +19,14 @@ function getTicketInfo(ticket){
           var commentCount = 0;
           var techAssigned = false;
           var currentUserGroup = jsonReturn[0] //grabs fist object from json which is current user's group
+          var isCurrentUserAssigned = jsonReturn[1] 
 
 
           /*
           Since we are only passing 1 ticket with the possibily of multiple users and comments,
           we know the next object in jsonReturn will be the ticket
           */
-          var obj = jsonReturn[1];
+          var obj = jsonReturn[2];
           ticketTable.innerHTML += "<p id='title'><strong>" + obj.title + "</strong></p>";
 		  
           if (obj.is_assigned == true){
@@ -58,14 +59,14 @@ function getTicketInfo(ticket){
           /*
           We know the following object will be the user who submitted the ticket
           */
-          var obj = jsonReturn[2];
+          var obj = jsonReturn[3];
           ticketTable.innerHTML += "<pre id='ticketInfo'><strong>Submitted by:  </strong> " + obj.username_id__username +  " (" + obj.user_group + ")</pre>";
 
           /*
           Loop through any remaining jsonReturn objects.  We know the fourth querty set contains
           1 or more techs assigned to the ticket.  We will pull these out first then comments
           */
-          for(var i = 3; i < jsonReturn.length; i++) {
+          for(var i = 4; i < jsonReturn.length; i++) {
             var obj = jsonReturn[i];
             // Grabs the techs from the json
             if(!obj.message) {
@@ -93,10 +94,8 @@ function getTicketInfo(ticket){
           //Link to add comments to current ticket
           ticketTable.innerHTML += "<br><p id='ticketInfo'><strong><a href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</strong></a></p>";
 
-          // Hides assigning, opening and closing tickets from 'User'
+          // Hides assigning, opening/closing tickets from 'User'
           if (currentUserGroup == 'T') {
-            //assign ticket
-            ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/assign?ticketNum=" + currentTicket + "'>Assign Ticket</strong></a></p>";
             //close ticket
             if (ticketStatus == "Open") {
               ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/close?ticketNum=" + currentTicket + "'>Close Ticket</strong></a></p>";
@@ -104,6 +103,15 @@ function getTicketInfo(ticket){
             } else {
               ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/open?ticketNum=" + currentTicket + "'>Re-Open Ticket</strong></a></p>";
             }
+
+            if (isCurrentUserAssigned == "T") {
+              //un-assign from ticket
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/unassign?ticketNum=" + currentTicket + "'>Unassign from Ticket</strong></a></p>";
+            } else {
+              //assign to ticket
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/assign?ticketNum=" + currentTicket + "'>Assign to Ticket</strong></a></p>";
+            }
+
           }
 
         }

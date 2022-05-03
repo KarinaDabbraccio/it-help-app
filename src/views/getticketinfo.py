@@ -40,7 +40,18 @@ def as_view(request):
                 userResult = Profile.objects.filter(user_ticket=request.POST["ticketNum"]).filter(user_group='U')
                 techResult = Profile.objects.filter(user_ticket=request.POST["ticketNum"]).filter(user_group='T')
                 commentResult = Comment.objects.filter(ticketNum=request.POST["ticketNum"]).order_by('date_entered')
-                result = chain(currentUserGroup,
+
+                #Checks if tech is currently assigned to ticket
+                currentTicket = Ticket.objects.get(ticketNum=request.POST["ticketNum"])
+                usersAssigned = Profile.objects.filter(user_ticket = currentTicket.ticketNum)
+                userList = list(usersAssigned.values_list('username', flat=True))
+
+                isAssigned = "F"
+                for user in userList:
+                        if  user == request.user.pk:
+                                isAssigned = "T"
+
+                result = chain(currentUserGroup, isAssigned,
                         ticketResult.values(),
                         userResult.values('username_id__username', 'user_group'),
                         techResult.values('username_id__username', 'user_group'),
