@@ -8,17 +8,27 @@
         
           <input class="inputFields" style="width:500px;" name="title" placeholder="Summary of issue...">
           <br><br>
-          <h4>Priority</h4>
+          Priority:
           <select name="priority">
               <option value="R">Routine</option>
               <option value="U">Urgent</option>
               <option value="E">Emergency</option>
             </select>
           <br><br>
-          <h4 style="padding-bottom: 5px">Description</h4>
+          
+          {% if currentUserGroup == 'T' %}
+          Create Ticket for User:
+          <select name="users">
+          {% for user in users %}
+            <option value="{{user.username}}">{{user.username}}</option>
+          {% endfor %}
+          </select>
+          <br><br>
+          {% endif %}
+         <h4 style="padding-bottom: 5px">Description</h4>
          <textarea rows = "8" cols = "60" name = "description" placeholder="Please enter issue here..."></textarea>
         <br><br>
-        <input type="submit" id="submit" value="Submit" style="border-radius: 25px" >
+        <input type="submit" id="submit" value="Submit">
       </form>
         {{error}}
 
