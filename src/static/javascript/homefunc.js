@@ -85,7 +85,7 @@ function getTicketInfo(ticket){
               ticketTable.innerHTML += "<br><p id='ticketInfo'><strong>Comment:</strong> "+ commentCount + "</p>";
               ticketTable.innerHTML += "<p id='ticketInfo'><strong>Message:</strong> " + obj.message + "</p>";
               ticketTable.innerHTML += "<p id='ticketInfo'><strong>From:</strong> " + obj.user__username +  " (" + obj.user__profile__user_group + ")</p>";
-              ticketTable.innerHTML += "<p id='ticketInfo'><strong>Date Entered:</strong> " + obj.date_entered + "</p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong>Date Entered:</strong> " + (obj.date_entered ? new Date(obj.date_entered).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'medium' }) : '-' ) + "</p>";
             }
           }
 
