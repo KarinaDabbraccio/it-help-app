@@ -21,12 +21,12 @@ def sort(tickets):
 def as_view(request):
 
     #check to see who is logged in
-    # currentUser = Profile.objects.get(username_id=request.user)
-    # currentUserGroup = getattr(currentUser, 'user_group')
+    currentUser = Profile.objects.get(username_id=request.user)
+    currentUserGroup = getattr(currentUser, 'user_group')
 
     #If current user is 'User' then only shows own tickets
     #Also hides 'All Ticket' link on home page
-    if not request.user.is_superuser:
+    if (currentUser == 'U') :
         ticketQuery = Ticket.objects.filter(profile__username_id=request.user)
         noshow = "noshow"
     else:
