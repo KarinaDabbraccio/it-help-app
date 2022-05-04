@@ -1,8 +1,6 @@
-const USER_GROUP = 0;
-const ASSIGNED = 1;
-const TICKET_INDEX = 2;
-const USER_INDEX = 3;
-const MIN_COMMENT_INDEX = 4;
+const TICKET_INDEX = 0;
+const USER_INDEX = 1;
+const MIN_COMMENT_INDEX = 2;
 
 function getTicketInfo(ticket){
   const priority = {
@@ -13,7 +11,7 @@ function getTicketInfo(ticket){
 
   const userGroup = {
     U: 'User',
-    T: 'Tech'
+    T: 'Admin'
   };
 
   let allTickets = "alltickets";
@@ -30,13 +28,12 @@ function getTicketInfo(ticket){
         success: function( response ) 
         {
           let ticketTable = document.getElementById("ticketDiv");
-          let jsonReturn = JSON.parse(response);
-          
+          let jsonReturn = JSON.parse(response).filter(value => typeof value == "object");
+          console.log(jsonReturn.map(value => typeof value));
           ticketTable.innerHTML = "";
           var commentCount = 0;
           var techAssigned = false;
-          const currentUserGroup = jsonReturn[USER_GROUP] //grabs fist object from json which is current user's group
-          const isCurrentUserAssigned = jsonReturn[ASSIGNED]
+          // var currentUserGroup = jsonReturn[1] //grabs fist object from json which is current user's group
           const userInfo = jsonReturn[USER_INDEX];
           /*
           Since we are only passing 1 ticket with the possibily of multiple users and comments,
@@ -105,8 +102,9 @@ function getTicketInfo(ticket){
           ticketTable.innerHTML += "<br><p id='ticketInfo'><strong><a class='link' href='/newcomment?ticketNum=" + currentTicket + "'>Add Comment</strong></a></p>";
 
           // // Hides assigning, opening and closing tickets from 'User'
-          if (currentUserGroup == 'T') {
-            ticketTable.innerHTML += "<br>";
+          if (userInfo.user_group == 'T') {
+            //assign ticket
+            ticketTable.innerHTML += "<p id='ticketInfo'><strong><a class='link' href='/assign?ticketNum=" + currentTicket + "'>Assign Ticket</strong></a></p>";
             //close ticket
             if (ticketStatus == "Open") {
               ticketTable.innerHTML += "<p id='ticketInfo'><strong><a class='link' href='/close?ticketNum=" + currentTicket + "'>Close Ticket</strong></a></p>";
@@ -114,13 +112,13 @@ function getTicketInfo(ticket){
             } else {
               ticketTable.innerHTML += "<p id='ticketInfo'><strong><a class='link' href='/open?ticketNum=" + currentTicket + "'>Re-Open Ticket</strong></a></p>";
             }
-            ticketTable.innerHTML += "<br>";
+
             if (isCurrentUserAssigned == "T") {
               //un-assign from ticket
-              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a class='link' href='/unassign?ticketNum=" + currentTicket + "'>Unassign from Ticket</strong></a></p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/unassign?ticketNum=" + currentTicket + "'>Unassign from Ticket</strong></a></p>";
             } else {
               //assign to ticket
-              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a class='link' href='/assign?ticketNum=" + currentTicket + "'>Assign to Ticket</strong></a></p>";
+              ticketTable.innerHTML += "<p id='ticketInfo'><strong><a href='/assign?ticketNum=" + currentTicket + "'>Assign to Ticket</strong></a></p>";
             }
           }
         }
@@ -271,7 +269,10 @@ function BuildTable(response){
               mark = "&#x2715;"
             }
 /*  Assigned:<p class="assigned'+assigned+'">' + mark +'</p></h4>     */
-            ticketDiv += '<p class="subTicketHeaders">Assigned:<b class="assigned'+assigned+'">' + mark +'</b><p class="ticketP">Creation Date: ' + jsonReturn[i]["date_created"] +'</p><p class="ticketP">Due Date:' + jsonReturn[i]["due_date"] + '</p><p class="ticketP">Last Checked:' + jsonReturn[i]["last_checked"] + '</p></div>'
+            ticketDiv += '<p class="subTicketHeaders">Assigned:<b class="assigned'+assigned+'">' + mark 
+            +'</b><p class="ticketP">Creation Date: ' + ((jsonReturn[i]["date_created"]) ? new Date(jsonReturn[i]["date_created"]).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'medium' }) : '-' ) 
+            +'</p><p class="ticketP">Due Date: ' + ((jsonReturn[i]["due_date"]) ? new Date(jsonReturn[i]["due_date"]).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'medium' }) : '-' ) 
+            + '</p><p class="ticketP">Last Checked: ' + ((jsonReturn[i]["last_checked"]) ? new Date(jsonReturn[i]["last_checked"]).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'medium' }) : '-' ) + '</p></div>'
             innerHtml += ticketDiv;
           }
           ticketTable.innerHTML = innerHtml;

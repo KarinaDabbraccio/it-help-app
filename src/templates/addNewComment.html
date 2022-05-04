@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 
     {% block content %}
-    <div class="sign-in-form" style="width:450px;">
+    <div class="sign-in-form" style="width:450px; border-radius: 25px" >
       <form id="newComment"  action="/newcomment/" method="POST">
           {% csrf_token %}
         <h3>Add new comment to ticket:</h3>
@@ -16,7 +16,7 @@
         <br>
         <textarea rows = "5" cols = "48" name = "message" placeholder="Please comment here..."></textarea>
         <br><br>
-        <input type="submit" id="submit" value="Submit">
+        <input type="submit" id="submit" value="Submit" style="border-radius: 25px">
       </form>
         {{error}}
 
