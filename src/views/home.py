@@ -26,7 +26,7 @@ def as_view(request):
 
     #If current user is 'User' then only shows own tickets
     #Also hides 'All Ticket' link on home page
-    if (currentUser == 'U') :
+    if (currentUserGroup == 'U') :
         ticketQuery = Ticket.objects.filter(profile__username_id=request.user)
         noshow = "noshow"
     else:
