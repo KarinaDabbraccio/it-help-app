@@ -17,7 +17,7 @@
           <br>
           
           {% if currentUserGroup == 'T' %}
-          Create Ticket for User:
+	  <h4 style="padding-bottom: 5px">Create Ticket for User:</h4>
           <select name="users">
           {% for user in users %}
             <option value="{{user.username}}">{{user.username}}</option>
