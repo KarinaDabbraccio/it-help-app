@@ -53,30 +53,3 @@ You can create your own admin account with the following command.
 `python manage.py createsuperuser` 
 
 See the [Django Docs](https://docs.djangoproject.com/en/4.0/) for more info.
-
-## Installation using Docker
-
-Install Docker. You will also need to install [PostgreSQL](https://www.postgresql.org/download/) and run it on `localhost:5432`. Find and configure PostgreSQL (Find and change `listen_addresses` in the `postgresql.conf` and `pg_hba.conf` file) to allow connections from your external IP address. Your external IP address will replace what `DB_URL` is set to when running the Docker files.
-
-## Running the Docker container
-
-To run the tests, build the Docker image
-```
-docker build -t it-help-app/local . --build-arg DB_URL=[host-url] --target test
-```
-and run it
-```
-docker run -it --rm it-help-app/local
-```
-You can also run the server too
-```
-docker build -t it-help-app/local . --build-arg DB_URL=[host-url] --target build
-docker run -it -p 8000:8000 it-help-app/local
-```
-
-## Meet the Dev Team
-
-[Kobi](https://github.com/k-hsu)\
-[Jim](https://github.com/stretch333)\
-[Jared](https://github.com/Zyphax88)\
-[Grant](https://github.com/grantcollins)
