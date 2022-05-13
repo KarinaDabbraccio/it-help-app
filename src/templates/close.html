@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 
     {% block content %}
-    <div class="sign-in-form" style="width:450px; border-radius: 25px">
+    <div class="sign-in-form" style="width:450px">
       <form id="close"  action="/close/" method="POST">
           {% csrf_token %}
         <h3>Would you like to close ticket:</h3>
@@ -14,8 +14,8 @@
         </script>
 
         <br><br>
-        <input type="submit" id="submit" value="Yes" name = "submit" style="border-radius: 25px">
-        <input type="submit" id="submit" value="No" name = "submit" style="border-radius: 25px">       
+        <input type="submit" id="submit" value="Yes" name = "submit">
+        <input type="submit" id="submit" value="No" name = "submit">       
 
       </form>
         {{error}}

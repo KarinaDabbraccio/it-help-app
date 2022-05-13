@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 
     {% block content %}
-    <div class="sign-in-form" style="width:600px; border-radius: 25px; padding-bottom: 10px">
+    <div class="sign-in-form" style="width:600px; padding-bottom: 10px">
       <h3>Create New Ticket</h3> 
 	  <form id="newTicket"  action="/newticket/" method="POST">
           {% csrf_token %}        
@@ -28,7 +28,7 @@
 
          <h4 style="padding-bottom: 5px">Description</h4>
          <textarea rows = "8" cols = "60" name = "description" placeholder="Please enter issue here..."></textarea>
-        <input type="submit" id="submit" value="Submit" style="border-radius: 25px">
+        <input type="submit" id="submit" value="Submit">
       </form>
         {{error}}
 
